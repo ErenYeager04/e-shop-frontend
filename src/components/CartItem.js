@@ -12,7 +12,7 @@ const CartItem = ({ product }) => {
     const data = { _id: product.productId }
     console.log(data)
     
-    const response = await fetch(`https://e-shop-backend.herokuapp.com/cart/deleteProduct`, {
+    const response = await fetch(`https://e-shop-backend-bd4c.onrender.com/cart/deleteProduct`, {
       method: 'DELETE',
       body: JSON.stringify(data),
       headers: {

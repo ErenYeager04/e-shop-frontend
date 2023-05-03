@@ -14,7 +14,7 @@ const Shop = () => {
 
   useEffect(() => {
     const fetchProducts = async () => {
-      const response = await fetch(`https://e-shop-backend.herokuapp.com/product/getProducts`)
+      const response = await fetch(`https://e-shop-backend-bd4c.onrender.com/product/getProducts`)
       const json = await response.json()
       const allBrands = json.map(product => product.brand);
       const uniqueBrands = [...new Set(allBrands)];

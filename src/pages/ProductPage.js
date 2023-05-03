@@ -15,7 +15,7 @@ const DevicePage = () => {
 
   useEffect(() => {
     const fetchWorkouts = async () => {
-      const response = await fetch(`https://e-shop-backend.herokuapp.com/product/getProducts/${id}`)
+      const response = await fetch(`https://e-shop-backend-bd4c.onrender.com/product/getProducts/${id}`)
       const json = await response.json()
       const ratings = await json.rating
       const rating = await ratings.map(r => {return r.rating})

@@ -28,7 +28,7 @@ const DeviseList = () => {
 
   useEffect(() => {
     const fetchProducts = async () => {
-      const response = await fetch(`https://e-shop-backend.herokuapp.com/product/getProducts?${queryString}`)
+      const response = await fetch(`https://e-shop-backend-bd4c.onrender.com/product/getProducts?${queryString}`)
       const json = await response.json()
       setProducts(json)
     }

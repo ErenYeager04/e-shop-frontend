@@ -27,7 +27,7 @@ const Admin = () => {
     formData.append("brand", brand);
     formData.append("type", type);
 
-    const response = await fetch(`https://e-shop-backend.herokuapp.com/product/makeProduct`, {
+    const response = await fetch(`https://e-shop-backend-bd4c.onrender.com/product/makeProduct`, {
       method: 'POST',
       body: formData,
       headers: {

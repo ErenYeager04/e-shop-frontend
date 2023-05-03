@@ -10,7 +10,7 @@ const RatingModal = ({ showModal, handleClose, _id }) => {
   const handleSubmit = async () => {
     const data = { _id, rating }
 
-    const response = await fetch(`https://e-shop-backend.herokuapp.com/product/addRating`, {
+    const response = await fetch(`https://e-shop-backend-bd4c.onrender.com/product/addRating`, {
       method: 'POST',
       body: JSON.stringify(data),
       headers: {

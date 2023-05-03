@@ -10,7 +10,7 @@ const CartModal = ({ showModal, handleClose, _id, }) => {
   const handleSubmit = async () => {
     const data = { _id, quantity}
     
-    const response = await fetch(`https://e-shop-backend.herokuapp.com/cart/makeCart`, {
+    const response = await fetch(`https://e-shop-backend-bd4c.onrender.com/cart/makeCart`, {
       method: 'POST',
       body: JSON.stringify(data),
       headers: {

@@ -6,10 +6,11 @@ import CartItem from '../components/CartItem';
 const Cart = () => {
   const [cart, setCart] = useState([])
   const {token} = useSelector((state) => state.user)
+  const [message, setMessage] = useState(false)
 
   useEffect(() => {
     const fetchWorkouts = async () => {
-      const response = await fetch(`https://e-shop-backend.herokuapp.com/cart/getProductsFromCart`, {  
+      const response = await fetch(`https://e-shop-backend-bd4c.onrender.com/cart/getProductsFromCart`, {  
       headers: {
         'Content-Type': 'application/json',
         'Authorization': `Bearer ${token}`
@@ -59,7 +60,8 @@ const Cart = () => {
                 <strong>Total:</strong> ${getTotalPrice().toFixed(2)}
               </td>
               <td>
-                <Button variant="primary">Checkout</Button>
+                <Button variant="primary"onClick={() => setMessage(!message)}>Checkout</Button>
+                {message && <div className="text-danger mt-1">I have exams, no time</div>}
               </td>
             </tr>
           </tbody>
