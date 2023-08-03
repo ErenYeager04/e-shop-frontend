@@ -1,18 +1,15 @@
 import React, { useState } from "react";
 import Button from "react-bootstrap/Button";
-import CartModal from "./CartModal";
 import { useSelector } from 'react-redux'
 
 const CartItem = ({ product }) => {
-  const [showModal, setShowModal] = useState(false);
-  const { token } = useSelector((state) => state.user)
+  const { token, userId } = useSelector((state) => state.user)
   const [error, setError] = useState(null)
 
   const handleRemove = async () => {
-    const data = { _id: product.productId }
-    console.log(data)
+    const data = { userId: userId, productId: product.productId }
     
-    const response = await fetch(`https://e-shop-backend-bd4c.onrender.com/cart/deleteProduct`, {
+    const response = await fetch(`${process.env.REACT_APP_BACKEND}/api/Cart/deleteProduct`, {
       method: 'DELETE',
       body: JSON.stringify(data),
       headers: {
@@ -33,35 +30,19 @@ const CartItem = ({ product }) => {
 
   };
 
-  const handleRedactClick = () => {
-    setShowModal(true);
-  };
-
   return (
     <tr>
       <td>
-        <img src={product.img} alt={product.title} width="50" />
-        {product.title}
+        <img src={product.product.imageUrl} alt={product.product.title} width="50" className=" mx-2"/>
+        {product.product.title}
       </td>
-      <td>{product.quantity}</td>
-      <td>${product.price.toFixed(2)}</td>
-      <td>${(product.price * product.quantity).toFixed(2)}</td>
+      <td>{product.seasons}</td>
+      <td>${product.product.price.toFixed(2)}</td>
+      <td>${(product.product.price * product.seasons).toFixed(2)}</td>
       <td>
         <Button variant="danger" className="my-2 mx-1" onClick={handleRemove}>
           Remove
         </Button>
-        <Button
-          variant="secondary"
-          className="mx-1"
-          onClick={handleRedactClick}
-        >
-          Redact
-        </Button>
-        <CartModal
-          showModal={showModal}
-          handleClose={() => setShowModal(false)}
-          _id={product.productId}
-        />
         {error && <div className="text-danger mt-1">{error}</div>}
       </td>
     </tr>

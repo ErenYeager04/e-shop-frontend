@@ -1,4 +1,4 @@
-import { FaGithub } from 'react-icons/fa';
+import { FaGithub, FaHouzz} from 'react-icons/fa';
 
 const Footer = () => {
   return (
@@ -20,6 +20,11 @@ const Footer = () => {
                 <FaGithub size={30} />
                 <span className="pl-2 mx-2">Backend</span>
               </a>
+              <a href={`${process.env.REACT_APP_BACKEND}/swagger/index.html`} className="ml-4">
+                <FaHouzz size={30} />
+                <span className="pl-2 mx-2">Endpoints</span>
+              </a>
+              
             </div>
           </div>
         </div>

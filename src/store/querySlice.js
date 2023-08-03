@@ -1,8 +1,7 @@
 import { createSlice } from '@reduxjs/toolkit'
 
 const initialState = {
-  brand: '',
-  type: '',
+  query: ""
 }
 
 
@@ -11,7 +10,8 @@ export const querySlice = createSlice({
   initialState,
   reducers: {
     makeQuery: (state, action) => {
-      return {...state, ...action.payload}
+      const { query } = action.payload;
+      state.query = query
     },
   },
 })

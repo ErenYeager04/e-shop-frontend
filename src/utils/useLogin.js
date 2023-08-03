@@ -1,40 +1,39 @@
 import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
-import { useDispatch } from 'react-redux'
-import { addUser } from '../store/userSlice'
+import { AddUserHook } from './AddUserHook'
+
 
 export const useLogin = () => {
   const [error, setError] = useState(null)
   const [isLoading, setIsLoading] = useState(null)
+  //For redirecting
   const navigate = useNavigate()
-  const dispatch  = useDispatch()
-
+  // To decode token and get data from it
+  const { userHook } = AddUserHook()
+  
   const login = async (email, password) => {
     setIsLoading(true)
     setError(null)
-
-    const response = await fetch(`https://e-shop-backend-bd4c.onrender.com/auth/login`, {
+     
+    const response = await fetch(`${process.env.REACT_APP_BACKEND}/api/User/login`, {
       method: 'POST',
-      headers: {'Content-Type': 'application/json'},
+      headers: {
+        'Content-Type': 'application/json',
+        'Accept': '*/*',
+      },
+      credentials: 'include',
       body: JSON.stringify({ email, password })
     })
-    const json = await response.json()
 
     if (!response.ok) {
+      const error = await response.text()
       setIsLoading(false)
-      setError(json)
+      setError(error)
     }
+    
     if (response.ok) {
-      // save the user to local storage
-      localStorage.setItem('user', JSON.stringify(json))
-      dispatch(addUser(json))
-      console.log(json)
-
-
-      // update the auth context
-      // dispatch({type: 'LOGIN', payload: json})
-
-      // update loading state
+      const token = await response.text()
+      userHook(token)
       setIsLoading(false)
       navigate('/')
     }
